@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IRestartElement
@@ -21,6 +22,11 @@ public class PlayerController : MonoBehaviour, IRestartElement
     public float m_DampTime = 0.2f;
     [Range(0f, 1f)] public float m_RotationLerpPct = 0.8f;
 
+    [Header("Jump")]
+    public float m_JumpSpeed = 12f;
+    public float m_MaxAngleToKillGombaa = 50f;
+    public float m_KillJumpSpeed = 4f; 
+
     [Header("Punch")]
     public float m_MaxTimeToComboPunch = 0.8f;
     int m_CurrentPunchId;
@@ -31,7 +37,18 @@ public class PlayerController : MonoBehaviour, IRestartElement
 
     [Header("Input")]
     public int m_PunchMouseButton = 0;
+    private KeyCode m_JumpKeyCode = KeyCode.Space;
 
+    [Header("Elevator")]
+    public float m_MaxAngleToAttachToElevator = 30f;
+    Collider m_ElevatorCollider;
+
+    [Header("Audio")]
+    public AudioSource m_LeftFootStepAudioSource;
+    public AudioSource m_RightFootStepAudioSource;
+
+    int m_Life = 8;
+    int m_Coins = 0;    
 
     private void Awake()
     {
@@ -79,6 +96,7 @@ public class PlayerController : MonoBehaviour, IRestartElement
             l_Movement -= l_Forward;
         }
 
+
         l_Movement.Normalize();
 
         float l_SpeedAnimatorValue = 0.5f;
@@ -97,17 +115,28 @@ public class PlayerController : MonoBehaviour, IRestartElement
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(l_Movement), m_RotationLerpPct);
         }
 
+        if (Input.GetKey(m_JumpKeyCode))
+        {
+            if (CanJump())
+                Jump();
+        }
+
         l_Movement *= l_Speed*Time.deltaTime;
         m_VerticalSpeed += Physics.gravity.y * Time.deltaTime;
         l_Movement.y = m_VerticalSpeed * Time.deltaTime;
         CollisionFlags l_CollisionFlags = m_CharacterController.Move(l_Movement);   
-        if((l_CollisionFlags & CollisionFlags.CollidedBelow) != 0)
+        if((l_CollisionFlags & CollisionFlags.CollidedBelow) != 0 && m_VerticalSpeed < 0f)
             m_VerticalSpeed = 0f;
         else if((l_CollisionFlags & CollisionFlags.CollidedAbove) != 0 && m_VerticalSpeed > 0f)
             m_VerticalSpeed = 0f;
 
         UpdatePunch();
     }
+    private void LateUpdate()
+    {
+        UpdateElevator();
+    }
+    
     void UpdatePunch()
     {
         if (CanPunch() && Input.GetMouseButtonDown(m_PunchMouseButton))
@@ -141,11 +170,116 @@ public class PlayerController : MonoBehaviour, IRestartElement
         else if (PunchType == TPunchType.KICK)
             m_KickPunchCollider.SetActive(Active);
     }
+    bool CanJump()
+    {
+        return true;
+    }
+    void Jump()
+    {
+        m_VerticalSpeed = m_JumpSpeed;
+    }
+    void JumpOverEnemy()
+    {
+        m_VerticalSpeed = m_KillJumpSpeed;
+    }
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if(hit.collider.CompareTag("Goomba"))
+        {
+            GoombaEnemy l_GoombaEnemy = hit.collider.GetComponent<GoombaEnemy>();
+
+            if (CanKillWithFeet(hit))
+            {
+                l_GoombaEnemy.Kill();
+                JumpOverEnemy();
+            }
+        }
+    }
+    bool CanKillWithFeet(ControllerColliderHit hit)
+    {
+        float l_Dot = Vector3.Dot(hit.normal, Vector3.up);
+
+        return m_VerticalSpeed < 0f && l_Dot > Mathf.Cos(m_MaxAngleToKillGombaa * Mathf.Deg2Rad);
+    }
     public void RestartGame()
     {
         m_CharacterController.enabled = false;
         transform.position = m_StartPosition;
         transform.rotation = m_StartRotation;
         m_CharacterController.enabled = true;
+    }
+    public void Step (AnimationEvent _AnimationEvent)
+    {
+        AudioSource l_CurrentAudioSource = null;
+        if (_AnimationEvent.stringParameter == "Left")
+        {
+            Debug.Log("Left");
+        }
+        else if(_AnimationEvent.stringParameter == "Right")
+        {
+            Debug.Log("Right");
+        }
+
+        AudioClip l_AudioClip = (AudioClip)_AnimationEvent.objectReferenceParameter;
+        l_CurrentAudioSource.clip = l_AudioClip;
+        l_CurrentAudioSource.Play();
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Elevator"))
+        {
+            if (CanAttachToElevator(other))
+            {
+                AttachToElevator(other);
+            }
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.CompareTag("Elevator"))
+        {
+            DetachFromElevator();
+        }
+    }
+    bool CanAttachToElevator(Collider ElevatorCollider)
+    {
+        return Vector3.Dot(ElevatorCollider.transform.up, Vector3.up) > Mathf.Cos(m_MaxAngleToAttachToElevator * Mathf.Deg2Rad);
+    }
+    void AttachToElevator(Collider ElevatorCollider)
+    {
+        transform.SetParent(ElevatorCollider.transform.parent);
+        m_ElevatorCollider = ElevatorCollider;
+    }
+    void DetachFromElevator()
+    {
+        transform.SetParent(null);
+        UpdateUpElevator();
+        m_ElevatorCollider = null;
+    }
+    void UpdateUpElevator()
+    {
+        Vector3 l_Direction = transform.forward;
+        l_Direction.y = 0f;
+        l_Direction.Normalize();
+        transform.rotation = Quaternion.LookRotation(l_Direction, Vector3.up);
+    }
+    void UpdateElevator()
+    {
+        if (m_ElevatorCollider != null)
+        {
+            UpdateUpElevator();
+        }
+    }
+    public void AddCoin()
+    {
+        ++m_Coins;
+        GameManager.GetGameManager().m_GameUI.SetCoins(m_Coins);
+        GameManager.GetGameManager().m_GameUI.ShowUI();
+    }
+    public void Hit()
+    {
+        --m_Life;
+        GameManager.GetGameManager().m_GameUI.SetLifeBar(m_Life/8f);
+        GameManager.GetGameManager().m_GameUI.ShowUI();
     }
 }

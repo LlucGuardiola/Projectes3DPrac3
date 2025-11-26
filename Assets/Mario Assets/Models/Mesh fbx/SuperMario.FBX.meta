@@ -1,210 +1,553 @@
 fileFormatVersion: 2
 guid: 2c49a169fa02b2545921fcc829011ecb
-timeCreated: 1479828672
-licenseType: Free
 ModelImporter:
-  serializedVersion: 19
-  fileIDToRecycleName:
-    100000: bn_chest
-    100002: bn_head
-    100004: bn_hip
-    100006: bn_L_armlower
-    100008: bn_L_armupper
-    100010: bn_L_foot
-    100012: bn_L_hand
-    100014: bn_L_shin
-    100016: bn_L_thigh
-    100018: bn_neck
-    100020: bn_R_armlower
-    100022: bn_R_armupper
-    100024: bn_R_foot
-    100026: bn_R_hand
-    100028: bn_R_shin
-    100030: bn_R_thigh
-    100032: body
-    100034: Ctrl_chest
-    100036: Ctrl_COG
-    100038: Ctrl_Core
-    100040: Ctrl_head
-    100042: Ctrl_hip
-    100044: Ctrl_Knee_L
-    100046: Ctrl_Knee_R
-    100048: Ctrl_L_Elbow
-    100050: Ctrl_L_Hand
-    100052: Ctrl_Leg_L
-    100054: Ctrl_Leg_R
-    100056: Ctrl_neck
-    100058: Ctrl_R_Elbow
-    100060: Ctrl_R_Hand
-    100062: face
-    100064: Global Control
-    100066: glove1
-    100068: glove2
-    100070: hair
-    100072: hat
-    100074: PointCtrl_hand_L
-    100076: PointCtrl_hand_R
-    100078: PointCtrl_head
-    100080: PointCtrl_Hip
-    100082: PointCtrl_neck
-    100084: PointCtrl_Spine
-    100086: PointH_L_Ankle
-    100088: PointH_L_Toe
-    100090: PointH_R_Ankle
-    100092: PointH_R_Toe
-    100094: pupil1
-    100096: pupil2
-    100098: //RootNode
-    400000: bn_chest
-    400002: bn_head
-    400004: bn_hip
-    400006: bn_L_armlower
-    400008: bn_L_armupper
-    400010: bn_L_foot
-    400012: bn_L_hand
-    400014: bn_L_shin
-    400016: bn_L_thigh
-    400018: bn_neck
-    400020: bn_R_armlower
-    400022: bn_R_armupper
-    400024: bn_R_foot
-    400026: bn_R_hand
-    400028: bn_R_shin
-    400030: bn_R_thigh
-    400032: body
-    400034: Ctrl_chest
-    400036: Ctrl_COG
-    400038: Ctrl_Core
-    400040: Ctrl_head
-    400042: Ctrl_hip
-    400044: Ctrl_Knee_L
-    400046: Ctrl_Knee_R
-    400048: Ctrl_L_Elbow
-    400050: Ctrl_L_Hand
-    400052: Ctrl_Leg_L
-    400054: Ctrl_Leg_R
-    400056: Ctrl_neck
-    400058: Ctrl_R_Elbow
-    400060: Ctrl_R_Hand
-    400062: face
-    400064: Global Control
-    400066: glove1
-    400068: glove2
-    400070: hair
-    400072: hat
-    400074: PointCtrl_hand_L
-    400076: PointCtrl_hand_R
-    400078: PointCtrl_head
-    400080: PointCtrl_Hip
-    400082: PointCtrl_neck
-    400084: PointCtrl_Spine
-    400086: PointH_L_Ankle
-    400088: PointH_L_Toe
-    400090: PointH_R_Ankle
-    400092: PointH_R_Toe
-    400094: pupil1
-    400096: pupil2
-    400098: //RootNode
-    2300000: Ctrl_Leg_L
-    2300002: Ctrl_Leg_R
-    3300000: Ctrl_Leg_L
-    3300002: Ctrl_Leg_R
-    4300000: body
-    4300002: glove1
-    4300004: glove2
-    4300006: face
-    4300008: pupil1
-    4300010: pupil2
-    4300012: hat
-    4300014: hair
-    4300016: Ctrl_Leg_L
-    4300018: Ctrl_Leg_R
-    7400000: run
-    7400002: Jump
-    7400004: Idle
-    7400006: Crouch
-    7400008: Crouch_idle
-    7400010: Long_Jump
-    7400012: Stop
-    7400014: turn
-    7400016: Side_flip
-    7400018: Hang
-    7400020: Climb
-    7400022: double_jump
-    7400024: fall
-    7400026: land
-    7400028: dive
-    7400030: slide
-    7400032: slide_recover
-    7400034: slide_flip
-    7400036: air_knockback
-    7400038: ground_knockback
-    7400040: ground_recover
-    7400042: triple_jump
-    7400044: wall_kick
-    7400046: wall_kick_fall
-    7400048: bum_drop
-    7400050: bum_drop_recover
-    7400052: wall_push
-    7400054: wall_slide_right
-    7400056: wall_slide_left
-    7400058: jump_kick
-    7400060: side_flip_v2
-    7400062: punch_single
-    7400064: punch_double
-    7400066: kick_triple
-    7400068: creep
-    7400070: walk
-    7400072: hit_light_back
-    7400074: hit_light_front
-    7400076: backflip
-    7400078: ground_knockback_back
-    7400080: ground_kncockback_back_recover
-    7400082: air_knockback_back
-    7400084: run_redux
-    7400086: enter_level
-    7400088: death_back
-    7400090: death_front
-    9500000: //RootNode
-    13700000: body
-    13700002: face
-    13700004: glove1
-    13700006: glove2
-    13700008: hair
-    13700010: hat
-    13700012: pupil1
-    13700014: pupil2
+  serializedVersion: 22200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: bn_chest
+  - first:
+      1: 100002
+    second: bn_head
+  - first:
+      1: 100004
+    second: bn_hip
+  - first:
+      1: 100006
+    second: bn_L_armlower
+  - first:
+      1: 100008
+    second: bn_L_armupper
+  - first:
+      1: 100010
+    second: bn_L_foot
+  - first:
+      1: 100012
+    second: bn_L_hand
+  - first:
+      1: 100014
+    second: bn_L_shin
+  - first:
+      1: 100016
+    second: bn_L_thigh
+  - first:
+      1: 100018
+    second: bn_neck
+  - first:
+      1: 100020
+    second: bn_R_armlower
+  - first:
+      1: 100022
+    second: bn_R_armupper
+  - first:
+      1: 100024
+    second: bn_R_foot
+  - first:
+      1: 100026
+    second: bn_R_hand
+  - first:
+      1: 100028
+    second: bn_R_shin
+  - first:
+      1: 100030
+    second: bn_R_thigh
+  - first:
+      1: 100032
+    second: body
+  - first:
+      1: 100034
+    second: Ctrl_chest
+  - first:
+      1: 100036
+    second: Ctrl_COG
+  - first:
+      1: 100038
+    second: Ctrl_Core
+  - first:
+      1: 100040
+    second: Ctrl_head
+  - first:
+      1: 100042
+    second: Ctrl_hip
+  - first:
+      1: 100044
+    second: Ctrl_Knee_L
+  - first:
+      1: 100046
+    second: Ctrl_Knee_R
+  - first:
+      1: 100048
+    second: Ctrl_L_Elbow
+  - first:
+      1: 100050
+    second: Ctrl_L_Hand
+  - first:
+      1: 100052
+    second: Ctrl_Leg_L
+  - first:
+      1: 100054
+    second: Ctrl_Leg_R
+  - first:
+      1: 100056
+    second: Ctrl_neck
+  - first:
+      1: 100058
+    second: Ctrl_R_Elbow
+  - first:
+      1: 100060
+    second: Ctrl_R_Hand
+  - first:
+      1: 100062
+    second: face
+  - first:
+      1: 100064
+    second: Global Control
+  - first:
+      1: 100066
+    second: glove1
+  - first:
+      1: 100068
+    second: glove2
+  - first:
+      1: 100070
+    second: hair
+  - first:
+      1: 100072
+    second: hat
+  - first:
+      1: 100074
+    second: PointCtrl_hand_L
+  - first:
+      1: 100076
+    second: PointCtrl_hand_R
+  - first:
+      1: 100078
+    second: PointCtrl_head
+  - first:
+      1: 100080
+    second: PointCtrl_Hip
+  - first:
+      1: 100082
+    second: PointCtrl_neck
+  - first:
+      1: 100084
+    second: PointCtrl_Spine
+  - first:
+      1: 100086
+    second: PointH_L_Ankle
+  - first:
+      1: 100088
+    second: PointH_L_Toe
+  - first:
+      1: 100090
+    second: PointH_R_Ankle
+  - first:
+      1: 100092
+    second: PointH_R_Toe
+  - first:
+      1: 100094
+    second: pupil1
+  - first:
+      1: 100096
+    second: pupil2
+  - first:
+      1: 100098
+    second: //RootNode
+  - first:
+      4: 400000
+    second: bn_chest
+  - first:
+      4: 400002
+    second: bn_head
+  - first:
+      4: 400004
+    second: bn_hip
+  - first:
+      4: 400006
+    second: bn_L_armlower
+  - first:
+      4: 400008
+    second: bn_L_armupper
+  - first:
+      4: 400010
+    second: bn_L_foot
+  - first:
+      4: 400012
+    second: bn_L_hand
+  - first:
+      4: 400014
+    second: bn_L_shin
+  - first:
+      4: 400016
+    second: bn_L_thigh
+  - first:
+      4: 400018
+    second: bn_neck
+  - first:
+      4: 400020
+    second: bn_R_armlower
+  - first:
+      4: 400022
+    second: bn_R_armupper
+  - first:
+      4: 400024
+    second: bn_R_foot
+  - first:
+      4: 400026
+    second: bn_R_hand
+  - first:
+      4: 400028
+    second: bn_R_shin
+  - first:
+      4: 400030
+    second: bn_R_thigh
+  - first:
+      4: 400032
+    second: body
+  - first:
+      4: 400034
+    second: Ctrl_chest
+  - first:
+      4: 400036
+    second: Ctrl_COG
+  - first:
+      4: 400038
+    second: Ctrl_Core
+  - first:
+      4: 400040
+    second: Ctrl_head
+  - first:
+      4: 400042
+    second: Ctrl_hip
+  - first:
+      4: 400044
+    second: Ctrl_Knee_L
+  - first:
+      4: 400046
+    second: Ctrl_Knee_R
+  - first:
+      4: 400048
+    second: Ctrl_L_Elbow
+  - first:
+      4: 400050
+    second: Ctrl_L_Hand
+  - first:
+      4: 400052
+    second: Ctrl_Leg_L
+  - first:
+      4: 400054
+    second: Ctrl_Leg_R
+  - first:
+      4: 400056
+    second: Ctrl_neck
+  - first:
+      4: 400058
+    second: Ctrl_R_Elbow
+  - first:
+      4: 400060
+    second: Ctrl_R_Hand
+  - first:
+      4: 400062
+    second: face
+  - first:
+      4: 400064
+    second: Global Control
+  - first:
+      4: 400066
+    second: glove1
+  - first:
+      4: 400068
+    second: glove2
+  - first:
+      4: 400070
+    second: hair
+  - first:
+      4: 400072
+    second: hat
+  - first:
+      4: 400074
+    second: PointCtrl_hand_L
+  - first:
+      4: 400076
+    second: PointCtrl_hand_R
+  - first:
+      4: 400078
+    second: PointCtrl_head
+  - first:
+      4: 400080
+    second: PointCtrl_Hip
+  - first:
+      4: 400082
+    second: PointCtrl_neck
+  - first:
+      4: 400084
+    second: PointCtrl_Spine
+  - first:
+      4: 400086
+    second: PointH_L_Ankle
+  - first:
+      4: 400088
+    second: PointH_L_Toe
+  - first:
+      4: 400090
+    second: PointH_R_Ankle
+  - first:
+      4: 400092
+    second: PointH_R_Toe
+  - first:
+      4: 400094
+    second: pupil1
+  - first:
+      4: 400096
+    second: pupil2
+  - first:
+      4: 400098
+    second: //RootNode
+  - first:
+      23: 2300000
+    second: Ctrl_Leg_L
+  - first:
+      23: 2300002
+    second: Ctrl_Leg_R
+  - first:
+      33: 3300000
+    second: Ctrl_Leg_L
+  - first:
+      33: 3300002
+    second: Ctrl_Leg_R
+  - first:
+      43: 4300000
+    second: body
+  - first:
+      43: 4300002
+    second: glove1
+  - first:
+      43: 4300004
+    second: glove2
+  - first:
+      43: 4300006
+    second: face
+  - first:
+      43: 4300008
+    second: pupil1
+  - first:
+      43: 4300010
+    second: pupil2
+  - first:
+      43: 4300012
+    second: hat
+  - first:
+      43: 4300014
+    second: hair
+  - first:
+      43: 4300016
+    second: Ctrl_Leg_L
+  - first:
+      43: 4300018
+    second: Ctrl_Leg_R
+  - first:
+      74: 7400000
+    second: run
+  - first:
+      74: 7400002
+    second: Jump
+  - first:
+      74: 7400004
+    second: Idle
+  - first:
+      74: 7400006
+    second: Crouch
+  - first:
+      74: 7400008
+    second: Crouch_idle
+  - first:
+      74: 7400010
+    second: Long_Jump
+  - first:
+      74: 7400012
+    second: Stop
+  - first:
+      74: 7400014
+    second: turn
+  - first:
+      74: 7400016
+    second: Side_flip
+  - first:
+      74: 7400018
+    second: Hang
+  - first:
+      74: 7400020
+    second: Climb
+  - first:
+      74: 7400022
+    second: double_jump
+  - first:
+      74: 7400024
+    second: fall
+  - first:
+      74: 7400026
+    second: land
+  - first:
+      74: 7400028
+    second: dive
+  - first:
+      74: 7400030
+    second: slide
+  - first:
+      74: 7400032
+    second: slide_recover
+  - first:
+      74: 7400034
+    second: slide_flip
+  - first:
+      74: 7400036
+    second: air_knockback
+  - first:
+      74: 7400038
+    second: ground_knockback
+  - first:
+      74: 7400040
+    second: ground_recover
+  - first:
+      74: 7400042
+    second: triple_jump
+  - first:
+      74: 7400044
+    second: wall_kick
+  - first:
+      74: 7400046
+    second: wall_kick_fall
+  - first:
+      74: 7400048
+    second: bum_drop
+  - first:
+      74: 7400050
+    second: bum_drop_recover
+  - first:
+      74: 7400052
+    second: wall_push
+  - first:
+      74: 7400054
+    second: wall_slide_right
+  - first:
+      74: 7400056
+    second: wall_slide_left
+  - first:
+      74: 7400058
+    second: jump_kick
+  - first:
+      74: 7400060
+    second: side_flip_v2
+  - first:
+      74: 7400062
+    second: punch_single
+  - first:
+      74: 7400064
+    second: punch_double
+  - first:
+      74: 7400066
+    second: kick_triple
+  - first:
+      74: 7400068
+    second: creep
+  - first:
+      74: 7400070
+    second: walk
+  - first:
+      74: 7400072
+    second: hit_light_back
+  - first:
+      74: 7400074
+    second: hit_light_front
+  - first:
+      74: 7400076
+    second: backflip
+  - first:
+      74: 7400078
+    second: ground_knockback_back
+  - first:
+      74: 7400080
+    second: ground_kncockback_back_recover
+  - first:
+      74: 7400082
+    second: air_knockback_back
+  - first:
+      74: 7400084
+    second: run_redux
+  - first:
+      74: 7400086
+    second: enter_level
+  - first:
+      74: 7400088
+    second: death_back
+  - first:
+      74: 7400090
+    second: death_front
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: body
+  - first:
+      137: 13700002
+    second: face
+  - first:
+      137: 13700004
+    second: glove1
+  - first:
+      137: 13700006
+    second: glove2
+  - first:
+      137: 13700008
+    second: hair
+  - first:
+      137: 13700010
+    second: hat
+  - first:
+      137: 13700012
+    second: pupil1
+  - first:
+      137: 13700014
+    second: pupil2
+  externalObjects: {}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
     animationImportErrors: 
     animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
-      might lower retargeting quality:\nNote: Activate translation DOF on avatar to
-      improve retargeting quality.\n\t'bn_L_hand' has scale animation that will be
-      discarded.\n\t'bn_R_hand' has scale animation that will be discarded.\n\t'bn_R_foot'
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'bn_L_hand' has scale animation that will
+      be discarded.\n\t'bn_R_hand' has scale animation that will be discarded.\n\t'bn_R_foot'
       has scale animation that will be discarded.\n"
     animationRetargetingWarnings: "\nRetargeting quality report for clip 'Take 001':\n\tLeftFoot
-      average orientation error 0.0 deg and maximum orientation error 6.2 deg at time
-      10:23 (15.2%) Frame 623\n\tRightFoot average orientation error 0.0 deg and maximum
-      orientation error 3.6 deg at time 10:25 (15.2%) Frame 625\n"
+      average orientation error 0.0 deg and maximum orientation error 6.2 deg at
+      time 10:23 (15.2%) Frame 623\n\tRightFoot average orientation error 0.0 deg
+      and maximum orientation error 3.7 deg at time 10:25 (15.2%) Frame 625\n"
     animationDoRetargetingWarnings: 1
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
       name: run
       takeName: Take 001
+      internalID: 0
       firstFrame: 20
       lastFrame: 50
       wrapMode: 0
@@ -333,6 +676,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Jump
       takeName: Take 001
+      internalID: 0
       firstFrame: 80
       lastFrame: 90
       wrapMode: 0
@@ -357,8 +701,7 @@ ModelImporter:
       - time: 0.082692884
         functionName: Jump1
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: fa7ad1cdd24f13549aa20e4d285ba743,
-          type: 3}
+        objectReferenceParameter: {fileID: 11500000, guid: fa7ad1cdd24f13549aa20e4d285ba743, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -469,6 +812,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Idle
       takeName: Take 001
+      internalID: 0
       firstFrame: 150
       lastFrame: 260
       wrapMode: 0
@@ -597,6 +941,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Crouch
       takeName: Take 001
+      internalID: 0
       firstFrame: 270
       lastFrame: 280
       wrapMode: 0
@@ -725,6 +1070,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Crouch_idle
       takeName: Take 001
+      internalID: 0
       firstFrame: 300
       lastFrame: 360
       wrapMode: 0
@@ -853,6 +1199,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Long_Jump
       takeName: Take 001
+      internalID: 0
       firstFrame: 400
       lastFrame: 430
       wrapMode: 0
@@ -877,8 +1224,7 @@ ModelImporter:
       - time: 0.17917252
         functionName: LongJumpSound
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: fa7ad1cdd24f13549aa20e4d285ba743,
-          type: 3}
+        objectReferenceParameter: {fileID: 11500000, guid: fa7ad1cdd24f13549aa20e4d285ba743, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -989,6 +1335,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Stop
       takeName: Take 001
+      internalID: 0
       firstFrame: 460
       lastFrame: 470
       wrapMode: 0
@@ -1117,6 +1464,7 @@ ModelImporter:
     - serializedVersion: 16
       name: turn
       takeName: Take 001
+      internalID: 0
       firstFrame: 500
       lastFrame: 525
       wrapMode: 0
@@ -1245,6 +1593,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Side_flip
       takeName: Take 001
+      internalID: 0
       firstFrame: 560
       lastFrame: 600
       wrapMode: 0
@@ -1373,6 +1722,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Hang
       takeName: Take 001
+      internalID: 0
       firstFrame: 650
       lastFrame: 790
       wrapMode: 0
@@ -1501,6 +1851,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Climb
       takeName: Take 001
+      internalID: 0
       firstFrame: 810
       lastFrame: 855
       wrapMode: 0
@@ -1629,6 +1980,7 @@ ModelImporter:
     - serializedVersion: 16
       name: double_jump
       takeName: Take 001
+      internalID: 0
       firstFrame: 1000
       lastFrame: 1010
       wrapMode: 0
@@ -1653,8 +2005,7 @@ ModelImporter:
       - time: 0.19418187
         functionName: Jump2
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: fa7ad1cdd24f13549aa20e4d285ba743,
-          type: 3}
+        objectReferenceParameter: {fileID: 11500000, guid: fa7ad1cdd24f13549aa20e4d285ba743, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -1765,6 +2116,7 @@ ModelImporter:
     - serializedVersion: 16
       name: fall
       takeName: Take 001
+      internalID: 0
       firstFrame: 1100
       lastFrame: 1110
       wrapMode: 0
@@ -1893,6 +2245,7 @@ ModelImporter:
     - serializedVersion: 16
       name: land
       takeName: Take 001
+      internalID: 0
       firstFrame: 1200
       lastFrame: 1220
       wrapMode: 0
@@ -2021,6 +2374,7 @@ ModelImporter:
     - serializedVersion: 16
       name: dive
       takeName: Take 001
+      internalID: 0
       firstFrame: 1300
       lastFrame: 1310
       wrapMode: 0
@@ -2149,6 +2503,7 @@ ModelImporter:
     - serializedVersion: 16
       name: slide
       takeName: Take 001
+      internalID: 0
       firstFrame: 1350
       lastFrame: 1370
       wrapMode: 0
@@ -2277,6 +2632,7 @@ ModelImporter:
     - serializedVersion: 16
       name: slide_recover
       takeName: Take 001
+      internalID: 0
       firstFrame: 1400
       lastFrame: 1470
       wrapMode: 0
@@ -2405,6 +2761,7 @@ ModelImporter:
     - serializedVersion: 16
       name: slide_flip
       takeName: Take 001
+      internalID: 0
       firstFrame: 1500
       lastFrame: 1520
       wrapMode: 0
@@ -2533,6 +2890,7 @@ ModelImporter:
     - serializedVersion: 16
       name: air_knockback
       takeName: Take 001
+      internalID: 0
       firstFrame: 1600
       lastFrame: 1610
       wrapMode: 0
@@ -2661,6 +3019,7 @@ ModelImporter:
     - serializedVersion: 16
       name: ground_knockback
       takeName: Take 001
+      internalID: 0
       firstFrame: 1620
       lastFrame: 1660
       wrapMode: 0
@@ -2685,8 +3044,7 @@ ModelImporter:
       - time: 0.13921751
         functionName: HitSound
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: fa7ad1cdd24f13549aa20e4d285ba743,
-          type: 3}
+        objectReferenceParameter: {fileID: 11500000, guid: fa7ad1cdd24f13549aa20e4d285ba743, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -2797,6 +3155,7 @@ ModelImporter:
     - serializedVersion: 16
       name: ground_recover
       takeName: Take 001
+      internalID: 0
       firstFrame: 1700
       lastFrame: 1730
       wrapMode: 0
@@ -2925,6 +3284,7 @@ ModelImporter:
     - serializedVersion: 16
       name: triple_jump
       takeName: Take 001
+      internalID: 0
       firstFrame: 1800
       lastFrame: 1860
       wrapMode: 0
@@ -2949,8 +3309,7 @@ ModelImporter:
       - time: 0.11496353
         functionName: Jump3
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: fa7ad1cdd24f13549aa20e4d285ba743,
-          type: 3}
+        objectReferenceParameter: {fileID: 11500000, guid: fa7ad1cdd24f13549aa20e4d285ba743, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -3061,6 +3420,7 @@ ModelImporter:
     - serializedVersion: 16
       name: wall_kick
       takeName: Take 001
+      internalID: 0
       firstFrame: 1900
       lastFrame: 1915
       wrapMode: 0
@@ -3189,6 +3549,7 @@ ModelImporter:
     - serializedVersion: 16
       name: wall_kick_fall
       takeName: Take 001
+      internalID: 0
       firstFrame: 1915
       lastFrame: 1930.0001
       wrapMode: 0
@@ -3317,6 +3678,7 @@ ModelImporter:
     - serializedVersion: 16
       name: bum_drop
       takeName: Take 001
+      internalID: 0
       firstFrame: 1999.9999
       lastFrame: 2020.0001
       wrapMode: 0
@@ -3445,6 +3807,7 @@ ModelImporter:
     - serializedVersion: 16
       name: bum_drop_recover
       takeName: Take 001
+      internalID: 0
       firstFrame: 2055
       lastFrame: 2100
       wrapMode: 0
@@ -3573,6 +3936,7 @@ ModelImporter:
     - serializedVersion: 16
       name: wall_push
       takeName: Take 001
+      internalID: 0
       firstFrame: 2200
       lastFrame: 2260
       wrapMode: 0
@@ -3701,6 +4065,7 @@ ModelImporter:
     - serializedVersion: 16
       name: wall_slide_right
       takeName: Take 001
+      internalID: 0
       firstFrame: 2300
       lastFrame: 2340
       wrapMode: 0
@@ -3829,6 +4194,7 @@ ModelImporter:
     - serializedVersion: 16
       name: wall_slide_left
       takeName: Take 001
+      internalID: 0
       firstFrame: 2360
       lastFrame: 2400
       wrapMode: 0
@@ -3957,6 +4323,7 @@ ModelImporter:
     - serializedVersion: 16
       name: jump_kick
       takeName: Take 001
+      internalID: 0
       firstFrame: 2500
       lastFrame: 2550
       wrapMode: 0
@@ -4085,6 +4452,7 @@ ModelImporter:
     - serializedVersion: 16
       name: side_flip_v2
       takeName: Take 001
+      internalID: 0
       firstFrame: 2600
       lastFrame: 2650
       wrapMode: 0
@@ -4213,6 +4581,7 @@ ModelImporter:
     - serializedVersion: 16
       name: punch_single
       takeName: Take 001
+      internalID: 0
       firstFrame: 2700
       lastFrame: 2714
       wrapMode: 0
@@ -4237,16 +4606,14 @@ ModelImporter:
       - time: 1
         functionName: FinishPunch
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: fa7ad1cdd24f13549aa20e4d285ba743,
-          type: 3}
+        objectReferenceParameter: {fileID: 11500000, guid: fa7ad1cdd24f13549aa20e4d285ba743, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.14566678
         functionName: PunchSound1
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: fa7ad1cdd24f13549aa20e4d285ba743,
-          type: 3}
+        objectReferenceParameter: {fileID: 11500000, guid: fa7ad1cdd24f13549aa20e4d285ba743, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -4357,6 +4724,7 @@ ModelImporter:
     - serializedVersion: 16
       name: punch_double
       takeName: Take 001
+      internalID: 0
       firstFrame: 2800
       lastFrame: 2812
       wrapMode: 0
@@ -4381,16 +4749,14 @@ ModelImporter:
       - time: 1
         functionName: FinishPunch
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: fa7ad1cdd24f13549aa20e4d285ba743,
-          type: 3}
+        objectReferenceParameter: {fileID: 11500000, guid: fa7ad1cdd24f13549aa20e4d285ba743, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.110418096
         functionName: PunchSound2
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: fa7ad1cdd24f13549aa20e4d285ba743,
-          type: 3}
+        objectReferenceParameter: {fileID: 11500000, guid: fa7ad1cdd24f13549aa20e4d285ba743, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -4501,6 +4867,7 @@ ModelImporter:
     - serializedVersion: 16
       name: kick_triple
       takeName: Take 001
+      internalID: 0
       firstFrame: 2900
       lastFrame: 2935
       wrapMode: 0
@@ -4525,16 +4892,14 @@ ModelImporter:
       - time: 1
         functionName: FinishPunch
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: fa7ad1cdd24f13549aa20e4d285ba743,
-          type: 3}
+        objectReferenceParameter: {fileID: 11500000, guid: fa7ad1cdd24f13549aa20e4d285ba743, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.092729434
         functionName: PunchSound3
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: fa7ad1cdd24f13549aa20e4d285ba743,
-          type: 3}
+        objectReferenceParameter: {fileID: 11500000, guid: fa7ad1cdd24f13549aa20e4d285ba743, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -4645,6 +5010,7 @@ ModelImporter:
     - serializedVersion: 16
       name: creep
       takeName: Take 001
+      internalID: 0
       firstFrame: 3000
       lastFrame: 3060
       wrapMode: 0
@@ -4773,6 +5139,7 @@ ModelImporter:
     - serializedVersion: 16
       name: walk
       takeName: Take 001
+      internalID: 0
       firstFrame: 3100
       lastFrame: 3160
       wrapMode: 0
@@ -4796,17 +5163,15 @@ ModelImporter:
       events:
       - time: 0.19566345
         functionName: Step
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: fa7ad1cdd24f13549aa20e4d285ba743,
-          type: 3}
+        data: Left
+        objectReferenceParameter: {fileID: 8300000, guid: d95cbe9a404a522429b897ef59d0656a, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.6923256
         functionName: Step
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: fa7ad1cdd24f13549aa20e4d285ba743,
-          type: 3}
+        data: Right
+        objectReferenceParameter: {fileID: 8300000, guid: d95cbe9a404a522429b897ef59d0656a, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -4917,6 +5282,7 @@ ModelImporter:
     - serializedVersion: 16
       name: hit_light_back
       takeName: Take 001
+      internalID: 0
       firstFrame: 3200
       lastFrame: 3245
       wrapMode: 0
@@ -5045,6 +5411,7 @@ ModelImporter:
     - serializedVersion: 16
       name: hit_light_front
       takeName: Take 001
+      internalID: 0
       firstFrame: 3300
       lastFrame: 3345
       wrapMode: 0
@@ -5173,6 +5540,7 @@ ModelImporter:
     - serializedVersion: 16
       name: backflip
       takeName: Take 001
+      internalID: 0
       firstFrame: 3400
       lastFrame: 3460
       wrapMode: 0
@@ -5301,6 +5669,7 @@ ModelImporter:
     - serializedVersion: 16
       name: ground_knockback_back
       takeName: Take 001
+      internalID: 0
       firstFrame: 3500
       lastFrame: 3530
       wrapMode: 0
@@ -5429,6 +5798,7 @@ ModelImporter:
     - serializedVersion: 16
       name: ground_kncockback_back_recover
       takeName: Take 001
+      internalID: 0
       firstFrame: 3540
       lastFrame: 3580
       wrapMode: 0
@@ -5557,6 +5927,7 @@ ModelImporter:
     - serializedVersion: 16
       name: air_knockback_back
       takeName: Take 001
+      internalID: 0
       firstFrame: 3600
       lastFrame: 3610
       wrapMode: 0
@@ -5685,6 +6056,7 @@ ModelImporter:
     - serializedVersion: 16
       name: run_redux
       takeName: Take 001
+      internalID: 0
       firstFrame: 3700
       lastFrame: 3732
       wrapMode: 0
@@ -5709,16 +6081,14 @@ ModelImporter:
       - time: 0.16371503
         functionName: Step
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: fa7ad1cdd24f13549aa20e4d285ba743,
-          type: 3}
+        objectReferenceParameter: {fileID: 11500000, guid: fa7ad1cdd24f13549aa20e4d285ba743, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.6790716
         functionName: Step
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: fa7ad1cdd24f13549aa20e4d285ba743,
-          type: 3}
+        objectReferenceParameter: {fileID: 11500000, guid: fa7ad1cdd24f13549aa20e4d285ba743, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -5829,6 +6199,7 @@ ModelImporter:
     - serializedVersion: 16
       name: enter_level
       takeName: Take 001
+      internalID: 0
       firstFrame: 3800
       lastFrame: 3860.0002
       wrapMode: 0
@@ -5957,6 +6328,7 @@ ModelImporter:
     - serializedVersion: 16
       name: death_back
       takeName: Take 001
+      internalID: 0
       firstFrame: 3900
       lastFrame: 3954.9998
       wrapMode: 0
@@ -6085,6 +6457,7 @@ ModelImporter:
     - serializedVersion: 16
       name: death_front
       takeName: Take 001
+      internalID: 0
       firstFrame: 3999.9998
       lastFrame: 4070.0002
       wrapMode: 0
@@ -6109,8 +6482,7 @@ ModelImporter:
       - time: 0.108051375
         functionName: DeadSound
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: fa7ad1cdd24f13549aa20e4d285ba743,
-          type: 3}
+        objectReferenceParameter: {fileID: 11500000, guid: fa7ad1cdd24f13549aa20e4d285ba743, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -6224,25 +6596,49 @@ ModelImporter:
     globalScale: 0.01
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 0
+    importVisibility: 0
     importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    nodeNameCollisionStrategy: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
+    normalCalculationMode: 0
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
+    serializedVersion: 3
     human:
     - boneName: bn_hip
       humanName: Hips
@@ -6374,257 +6770,255 @@ ModelImporter:
         modified: 0
     skeleton:
     - name: SuperMario(Clone)
+      parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: body
+      parentName: 
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: face
+      parentName: 
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: Global Control
+      parentName: 
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: Ctrl_Core
+      parentName: 
       position: {x: -0, y: -0.000000026893339, z: 0.61524785}
       rotation: {x: 0.000000023849761, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: Ctrl_COG
+      parentName: 
       position: {x: -0, y: 0.012666701, z: -0.14484547}
       rotation: {x: 0.00000014901164, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 0.9999999, z: 0.9999999}
-      transformModified: 1
     - name: Ctrl_chest
+      parentName: 
       position: {x: -0.0014218843, y: 0.10870145, z: 0.10511019}
       rotation: {x: 0.5, y: 0.5000002, z: 0.49999994, w: 0.49999985}
       scale: {x: 0.13559325, y: 0.13559325, z: 0.13559325}
-      transformModified: 1
     - name: Ctrl_neck
+      parentName: 
       position: {x: -0.6823632, y: 2.1563969, z: 0.010484086}
       rotation: {x: -0.50000006, y: -0.49999997, z: -0.4999999, w: 0.5000001}
       scale: {x: 7.374998, y: 7.3749976, z: 7.3749976}
-      transformModified: 1
     - name: Ctrl_head
+      parentName: 
       position: {x: -0.0000014840067, y: 0.010353582, z: 0.112445064}
       rotation: {x: -0.706881, y: 0.017690953, z: 0.7068897, w: -0.01769952}
       scale: {x: 0.99999994, y: 1.0000001, z: 1.0000002}
-      transformModified: 1
     - name: PointCtrl_head
+      parentName: 
       position: {x: -0, y: 0, z: 0.00000007629278}
       rotation: {x: 0.0000020042046, y: 0.000000005589571, z: -0.00000009126961, w: 1}
       scale: {x: 1.0000001, y: 0.9999999, z: 0.99999976}
-      transformModified: 1
     - name: PointCtrl_neck
+      parentName: 
       position: {x: -0.0000000017880665, y: 0.000000019073486, z: 0}
       rotation: {x: 0.7063662, y: -0.032448795, z: -0.7063573, w: 0.03245365}
       scale: {x: 0.99999994, y: 1.0000001, z: 1}
-      transformModified: 1
     - name: PointCtrl_Spine
+      parentName: 
       position: {x: -0.7486938, y: -0.02567627, z: 0.010486374}
       rotation: {x: -0.6962815, y: 0.71776885, z: -0.0000011338133, w: 0.0000004348418}
       scale: {x: 7.3749976, y: 7.3749986, z: 7.3749986}
-      transformModified: 1
     - name: Ctrl_hip
+      parentName: 
       position: {x: -0.0000029945375, y: 0.00645727, z: 0.053216897}
       rotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
       scale: {x: 0.13559325, y: 0.13559325, z: 0.13559325}
-      transformModified: 1
     - name: PointCtrl_Hip
+      parentName: 
       position: {x: 0.00002212525, y: 0.35703674, z: -0.0053570173}
       rotation: {x: 0.48205334, y: -0.5173299, z: -0.48204753, w: 0.51732445}
       scale: {x: 7.374998, y: 7.374998, z: 7.374998}
-      transformModified: 1
     - name: Ctrl_L_Elbow
+      parentName: 
       position: {x: -0.32767114, y: 0.26361546, z: 0.3382077}
       rotation: {x: -4.2632564e-14, y: 0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: Ctrl_L_Hand
+      parentName: 
       position: {x: -0.5086559, y: 0.028052518, z: 0.33820876}
       rotation: {x: -4.2632564e-14, y: 0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: PointCtrl_hand_L
+      parentName: 
       position: {x: 0.000000076293944, y: 0.0000015640258, z: 0.00000015258789}
       rotation: {x: -0.00017093564, y: 0.0000092369755, z: 0.0211831, w: 0.99977565}
       scale: {x: 1.0000001, y: 1, z: 0.99999994}
-      transformModified: 1
     - name: Ctrl_R_Elbow
+      parentName: 
       position: {x: 0.32999977, y: 0.26361546, z: 0.3382077}
       rotation: {x: -4.2632564e-14, y: 0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: Ctrl_R_Hand
+      parentName: 
       position: {x: 0.5077967, y: 0.028052526, z: 0.33820876}
       rotation: {x: -4.2632564e-14, y: 0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: PointCtrl_hand_R
+      parentName: 
       position: {x: 0.000000114440915, y: -0.0000014877319, z: 0.00000022888183}
       rotation: {x: -0.00001651277, y: -0.00017014882, z: 0.9997756, w: 0.021186048}
       scale: {x: 0.9999999, y: 1.0000004, z: 1.0000001}
-      transformModified: 1
     - name: bn_hip
+      parentName: 
       position: {x: 5.536799e-10, y: 0.000000076293944, z: -0.000000076293944}
       rotation: {x: 0.7066668, y: -0.024948582, z: -0.7066665, w: 0.024940208}
       scale: {x: 1.0000004, y: 1.0000002, z: 1}
-      transformModified: 1
     - name: bn_chest
+      parentName: 
       position: {x: -0.10188225, y: 0.000000007152557, z: -0.000000006072587}
       rotation: {x: -0.0000046046925, y: 0.000000170259, z: -0.020088233, w: 0.99979824}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: bn_R_armupper
+      parentName: 
       position: {x: -0.23668624, y: -0.0006885075, z: -0.057234183}
       rotation: {x: -0.029028708, y: -0.7064621, z: 0.008666169, w: 0.70710224}
       scale: {x: 1.0000002, y: 1, z: 0.99999994}
-      transformModified: 1
     - name: bn_R_armlower
+      parentName: 
       position: {x: -0.26996157, y: -0.000000011920928, z: 0}
       rotation: {x: 0.00000017460307, y: -0.000048962356, z: -0.030522762, w: 0.9995341}
       scale: {x: 1, y: 1.0000001, z: 1}
-      transformModified: 1
     - name: bn_R_hand
+      parentName: 
       position: {x: -0.18099013, y: -0.000000057220458, z: -0.000000076293944}
       rotation: {x: -0.00095923006, y: -0.000024040988, z: -0.017319495, w: 0.99984956}
       scale: {x: 0.99999994, y: 0.99999994, z: 1}
-      transformModified: 1
     - name: bn_neck
+      parentName: 
       position: {x: -0.29601094, y: 0.000000052452087, z: 0.000000058111684}
       rotation: {x: -0.0000043820137, y: 0.0000058248115, z: 0.030709771, w: 0.99952835}
       scale: {x: 1.0000001, y: 1.0000001, z: 1}
-      transformModified: 1
     - name: bn_head
+      parentName: 
       position: {x: -0.112920456, y: 0.0000000047683715, z: 0.00000001695007}
       rotation: {x: -0.0000018017711, y: -0.000012322731, z: -0.020880254, w: 0.99978197}
       scale: {x: 0.9999999, y: 0.9999999, z: 1}
-      transformModified: 1
     - name: bn_L_armupper
+      parentName: 
       position: {x: -0.23668624, y: -0.00068861, z: 0.058093194}
       rotation: {x: 0.7071029, y: 0.008666487, z: -0.70646137, w: -0.029029684}
       scale: {x: 0.99999994, y: 1.0000002, z: 1}
-      transformModified: 1
     - name: bn_L_armlower
+      parentName: 
       position: {x: -0.26996157, y: -0.0000000047683715, z: 0}
       rotation: {x: -0.00000017656095, y: -0.00004889635, z: 0.030522758, w: 0.9995341}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: bn_L_hand
+      parentName: 
       position: {x: -0.18099006, y: 0.000000028610229, z: 0.000000076293944}
       rotation: {x: 0.0006176045, y: -0.000030242361, z: 0.01731951, w: 0.99984986}
       scale: {x: 0.99999994, y: 0.99999994, z: 1}
-      transformModified: 1
     - name: bn_L_thigh
+      parentName: 
       position: {x: -0.0000128936745, y: -0.00020627737, z: 0.11673275}
       rotation: {x: -0.00000018896985, y: 0.0000058956202, z: 0.9993503, w: 0.036042344}
       scale: {x: 0.99999976, y: 0.9999997, z: 0.99999994}
-      transformModified: 1
     - name: bn_L_shin
+      parentName: 
       position: {x: -0.18664975, y: -0.000000044107434, z: 0}
       rotation: {x: -3.1589351e-12, y: -3.649999e-10, z: -0.008556303, w: 0.9999634}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: bn_L_foot
+      parentName: 
       position: {x: -0.18534987, y: -0.000000042915342, z: 0}
       rotation: {x: -0.0000001941312, y: 0.0000000484415, z: 0.6910371, w: 0.72281927}
       scale: {x: 1.0000001, y: 1.0000001, z: 1}
-      transformModified: 1
     - name: bn_R_thigh
+      parentName: 
       position: {x: -0.0000128936745, y: -0.00020894768, z: -0.1146614}
       rotation: {x: 0.036043804, y: 0.99935025, z: 0.00016334467, w: 0.000007756816}
       scale: {x: 0.99999976, y: 0.9999999, z: 1}
-      transformModified: 1
     - name: bn_R_shin
+      parentName: 
       position: {x: -0.18664989, y: 0.000000039339064, z: -0.000000019073486}
       rotation: {x: -0.000003056997, y: 0.00000013676762, z: 0.008556539, w: 0.9999634}
       scale: {x: 1.0000001, y: 0.99999994, z: 1}
-      transformModified: 1
     - name: bn_R_foot
+      parentName: 
       position: {x: -0.18534964, y: 0.00000012397766, z: 0.000000028610229}
       rotation: {x: 0.7228181, y: -0.69103837, z: -0.00011802352, w: -0.00012554567}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: Ctrl_Knee_L
+      parentName: 
       position: {x: -0.116732754, y: -0.15636922, z: -0.33152977}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 0.5050604, y: 0.50506043, z: 0.50506043}
-      transformModified: 1
     - name: Ctrl_Knee_R
+      parentName: 
       position: {x: 0.11466131, y: -0.1563692, z: -0.33149695}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 0.5050604, y: 0.50506043, z: 0.50506043}
-      transformModified: 1
     - name: Ctrl_Leg_L
+      parentName: 
       position: {x: -0.11673273, y: 0.016617736, z: -0.5168279}
       rotation: {x: -0.00000023841858, y: 0, z: -0, w: 1}
       scale: {x: 1.0000001, y: 1.0000001, z: 1}
-      transformModified: 1
     - name: PointH_L_Ankle
+      parentName: 
       position: {x: 0.000000019073486, y: 0.000000039339064, z: -0.000000028610229}
-      rotation: {x: -0.000000023849767, y: 1.35000755e-14, z: -0.000000029802315,
-        w: 1}
+      rotation: {x: -0.000000023849767, y: 1.35000755e-14, z: -0.000000029802315, w: 1}
       scale: {x: 1.0000001, y: 0.9999999, z: 0.9999999}
-      transformModified: 1
     - name: PointH_L_Toe
+      parentName: 
       position: {x: -0, y: -0.24667504, z: -0.016967343}
       rotation: {x: -0.4838509, y: -0.5156437, z: 0.4838509, w: 0.5156435}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: Ctrl_Leg_R
+      parentName: 
       position: {x: 0.114661366, y: 0.01661724, z: -0.51681435}
       rotation: {x: -0.00000023841858, y: 0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: PointH_R_Ankle
+      parentName: 
       position: {x: -0.000000009536743, y: 0.000000038146972, z: 0}
-      rotation: {x: -0.0000000014979659, y: 0.0000000074505775, z: 0.0000000046566155,
-        w: 1}
+      rotation: {x: -0.0000000014979659, y: 0.0000000074505775, z: 0.0000000046566155, w: 1}
       scale: {x: 1.0000001, y: 1.0000002, z: 1.0000001}
-      transformModified: 1
     - name: PointH_R_Toe
+      parentName: 
       position: {x: -0, y: -0.24667504, z: -0.016967334}
       rotation: {x: -0.48385087, y: -0.5156438, z: 0.48385087, w: 0.5156435}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: glove1
+      parentName: 
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: glove2
+      parentName: 
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: hair
+      parentName: 
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: hat
+      parentName: 
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: pupil1
+      parentName: 
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: pupil2
+      parentName: 
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -6632,11 +7026,19 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 0.01
     rootMotionBoneName: 
     hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  importBlendShapeDeformPercent: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

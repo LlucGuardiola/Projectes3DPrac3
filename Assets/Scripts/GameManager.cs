@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager m_GameManager;
     List<IRestartElement> m_RestartElements = new List<IRestartElement>();
+    public GameUI m_GameUI;
+    public PlayerController m_Player;
 
     private void Awake()
     {
@@ -32,6 +34,14 @@ public class GameManager : MonoBehaviour
         if(Input.GetKey(KeyCode.R))
         {
             RestartGame();
+        }
+        if (Input.GetKey(KeyCode.H))
+        {
+            m_Player.Hit();
+        }
+        if (Input.GetKey(KeyCode.C))
+        {
+            m_Player.AddCoin();
         }
     }
     public void RestartGame()
