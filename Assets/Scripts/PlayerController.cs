@@ -255,6 +255,7 @@ public class PlayerController : MonoBehaviour, IRestartElement
         transform.SetParent(null);
         UpdateUpElevator();
         m_ElevatorCollider = null;
+        Debug.Log("Deatach");
     }
     void UpdateUpElevator()
     {
