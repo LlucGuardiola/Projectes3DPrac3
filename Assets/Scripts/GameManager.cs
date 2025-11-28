@@ -35,11 +35,11 @@ public class GameManager : MonoBehaviour
         {
             RestartGame();
         }
-        if (Input.GetKey(KeyCode.H))
+        if (Input.GetKeyDown(KeyCode.H))
         {
             m_Player.Hit();
         }
-        if (Input.GetKey(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.C))
         {
             m_Player.AddCoin();
         }

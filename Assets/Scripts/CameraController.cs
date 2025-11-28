@@ -14,9 +14,9 @@ public class CameraController : MonoBehaviour
     public LayerMask m_LayerMask;
     public float m_OffsetDistance = 0.1f;
     public float m_CurrentTime = 0f;
-    public float m_ResetTimeSpan = 5f;
-    private bool m_FinalPosition = false;
-    private Quaternion m_TargetPlayerRotation;
+    public float m_TimeToResetCam = 2f;
+    float m_ResetTime = 3f;
+    float m_ResetTimeCounter = 0f;
 
     private void Start()
     {
@@ -35,17 +35,23 @@ public class CameraController : MonoBehaviour
         Debug.Log(m_CurrentTime);
 
         CheckCameraState();
+        ResetCamera();
     }
     void CheckCameraState()
     {
-        if (m_CurrentTime >= m_ResetTimeSpan)
+        if (m_CurrentTime >= m_TimeToResetCam)
         {
-            m_Yaw = Mathf.Lerp(m_Yaw, m_Player.transform.rotation.eulerAngles.y, m_CurrentTime/4f);
+            m_ResetTimeCounter = 0;
         }
     }
     public void ResetTime()
     {
         m_CurrentTime = 0f; 
+    }
+    public void ResetCamera()
+    {
+        if (m_ResetTimeCounter <= m_ResetTime)
+            m_Yaw = Mathf.Lerp(m_Yaw, m_Player.transform.rotation.eulerAngles.y, m_ResetTimeCounter / m_ResetTime);
     }
     private void UpdateCamera()
     {

@@ -1,5 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
+using Unity.VisualScripting;
 using UnityEngine;
+
+
 
 public class PlayerController : MonoBehaviour, IRestartElement
 {
@@ -21,6 +24,7 @@ public class PlayerController : MonoBehaviour, IRestartElement
     public Transform m_LookAt;
     public float m_DampTime = 0.2f;
     [Range(0f, 1f)] public float m_RotationLerpPct = 0.8f;
+    CheckPoint m_CurrentCheckPoint;
 
     [Header("Jump")]
     public float m_JumpSpeed = 12f;
@@ -43,12 +47,15 @@ public class PlayerController : MonoBehaviour, IRestartElement
     public float m_MaxAngleToAttachToElevator = 30f;
     Collider m_ElevatorCollider;
 
+    [Header("Bridge")]
+    public float m_BridgeHitForce = 10f;
+
     [Header("Audio")]
     public AudioSource m_LeftFootStepAudioSource;
     public AudioSource m_RightFootStepAudioSource;
 
-    int m_Life = 8;
-    int m_Coins = 0;    
+    CoinsController m_CoinsController = new CoinsController();
+    LifeController m_LifeController = new LifeController();
 
     private void Awake()
     {
@@ -194,6 +201,10 @@ public class PlayerController : MonoBehaviour, IRestartElement
                 JumpOverEnemy();
             }
         }
+        else if(hit.collider.CompareTag("Bridge"))
+        {
+            hit.rigidbody.AddForceAtPosition(-hit.normal * m_BridgeHitForce, hit.point);
+        }
     }
     bool CanKillWithFeet(ControllerColliderHit hit)
     {
@@ -203,6 +214,12 @@ public class PlayerController : MonoBehaviour, IRestartElement
     }
     public void RestartGame()
     {
+        if(m_CurrentCheckPoint != null)
+        {
+            m_StartPosition = m_CurrentCheckPoint.m_RestartPosition.position;
+            m_StartRotation = m_CurrentCheckPoint.m_RestartPosition.rotation;
+        }
+
         m_CharacterController.enabled = false;
         transform.position = m_StartPosition;
         transform.rotation = m_StartRotation;
@@ -232,6 +249,10 @@ public class PlayerController : MonoBehaviour, IRestartElement
             {
                 AttachToElevator(other);
             }
+        }
+        else if (other.CompareTag("CheckPoint"))
+        {
+            m_CurrentCheckPoint = other.GetComponent<CheckPoint>();
         }
     }
     private void OnTriggerExit(Collider other)
@@ -272,14 +293,10 @@ public class PlayerController : MonoBehaviour, IRestartElement
     }
     public void AddCoin()
     {
-        ++m_Coins;
-        GameManager.GetGameManager().m_GameUI.SetCoins(m_Coins);
-        GameManager.GetGameManager().m_GameUI.ShowUI();
+        m_CoinsController.AddCoins(1);
     }
     public void Hit()
     {
-        --m_Life;
-        GameManager.GetGameManager().m_GameUI.SetLifeBar(m_Life/8f);
-        GameManager.GetGameManager().m_GameUI.ShowUI();
+        m_LifeController.AddLife(-1);
     }
 }
