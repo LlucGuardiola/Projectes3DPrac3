@@ -1206,8 +1206,8 @@ MonoBehaviour:
   m_MaxAngleToKillGombaa: 35
   m_KillJumpSpeed: 3
   m_JumpType: 0
-  m_CoyoteTime: 0.2
-  m_TimeBetweenJumps: 5
+  m_CoyoteTime: 0.3
+  m_TimeBetweenJumps: 0.3
   m_MaxTimeToComboPunch: 0.8
   m_RightHandPunchCollider: {fileID: 1218710873}
   m_LeftHandPunchCollider: {fileID: 839545577}
