@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 
 
@@ -55,8 +56,8 @@ public class PlayerController : MonoBehaviour, IRestartElement
     public AudioSource m_FootStepR;
     public AudioSource m_FootStepL;
 
-    CoinsController m_CoinsController = new CoinsController();
-    LifeController m_LifeController = new LifeController();
+    public CoinsController m_CoinsController = new CoinsController();
+    public LifeController m_LifeController = new LifeController();
 
     private void Awake()
     {
@@ -266,6 +267,15 @@ public class PlayerController : MonoBehaviour, IRestartElement
         {
             m_CurrentCheckPoint = other.GetComponent<CheckPoint>();
         }
+        else if (other.CompareTag("Item"))
+        {
+            Item l_Item = other.GetComponent<Item>();
+
+            if (l_Item.CanPick())
+            {
+                l_Item.Pick();
+            }
+        }
     }
     private void OnTriggerExit(Collider other)
     {
@@ -310,11 +320,12 @@ public class PlayerController : MonoBehaviour, IRestartElement
     public void Hit()
     {
         m_LifeController.AddLife(-1);
-      
-
+    }
+    public void Heal()
+    {
+        m_LifeController.AddLife(1);
     }
 
- 
     public void ApplyKnockback(Vector3 force)
     {
         m_KnockbackVelocity = force;
