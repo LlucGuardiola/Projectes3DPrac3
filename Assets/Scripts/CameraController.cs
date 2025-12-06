@@ -3,82 +3,117 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public PlayerController m_Player;
+
     float m_Yaw = 0f;
     float m_Pitch = 0f;
+
     public float m_YawSpeed = 360f;
     public float m_PitchSpeed = 180f;
     public float m_MinPitch = 60f;
     public float m_MaxPitch = 80f;
+
     public float m_MinDistance = 3f;
     public float m_MaxDistance = 12f;
+
     public LayerMask m_LayerMask;
     public float m_OffsetDistance = 0.1f;
-    public float m_CurrentTime = 0f;
-    public float m_TimeToResetCam = 2f;
-    float m_ResetTime = 3f;
-    float m_ResetTimeCounter = 0f;
+
+    public float m_TimeToResetCam = 5f;     
+    public float m_ResetTime = 4f;          
+
+    float idleTimer = 0f;
+    bool resetting = false;
+    float resetT = 0f;
+
+    float targetYaw;
+    float targetPitch;
 
     private void Start()
     {
         m_Yaw = transform.eulerAngles.y;
+        m_Pitch = transform.eulerAngles.x;
     }
+
     private void LateUpdate()
     {
-        Vector3 l_StartPosition = transform.position;
-
-        UpdateCamera();
-
-        if (transform.position != l_StartPosition) 
-            ResetTime();
-
-        m_CurrentTime += Time.deltaTime;
-        Debug.Log(m_CurrentTime);
-
-        CheckCameraState();
-        ResetCamera();
+        HandleInput();
+        HandleAutoReset();
+        UpdateCamera(); 
     }
-    void CheckCameraState()
+
+    void HandleInput()
     {
-        if (m_CurrentTime >= m_TimeToResetCam)
+        float h = Input.GetAxis("Mouse X");
+        float v = Input.GetAxis("Mouse Y");
+
+        bool hasInput = Mathf.Abs(h) > 0.01f || Mathf.Abs(v) > 0.01f;
+
+        if (hasInput)
         {
-            m_ResetTimeCounter = 0;
+            idleTimer = 0f;
+            resetting = false;
+
+            m_Yaw += h * m_YawSpeed * Time.deltaTime;
+            m_Pitch += v * m_PitchSpeed * Time.deltaTime;
+            m_Pitch = Mathf.Clamp(m_Pitch, m_MinPitch, m_MaxPitch);
+
+            return;
+        }
+
+        idleTimer += Time.deltaTime;
+    }
+
+    void HandleAutoReset()
+    {
+        if (!resetting && idleTimer >= m_TimeToResetCam)
+        {
+            resetting = true;
+            resetT = 0f;
+
+            targetYaw = m_Player.transform.eulerAngles.y;
+
+            targetPitch = -40f;
+        }
+
+        if (resetting)
+        {
+            resetT += Time.deltaTime / m_ResetTime;
+
+            m_Yaw = Mathf.LerpAngle(m_Yaw, targetYaw, resetT);
+            m_Pitch = Mathf.Lerp(m_Pitch, targetPitch, resetT);
+
+            if (resetT >= 1f)
+            {
+                resetting = false;
+                idleTimer = 0f;
+            }
         }
     }
-    public void ResetTime()
-    {
-        m_CurrentTime = 0f; 
-    }
-    public void ResetCamera()
-    {
-        if (m_ResetTimeCounter <= m_ResetTime)
-            m_Yaw = Mathf.Lerp(m_Yaw, m_Player.transform.rotation.eulerAngles.y, m_ResetTimeCounter / m_ResetTime);
-    }
+
     private void UpdateCamera()
     {
-        Vector3 l_LookAt = m_Player.m_LookAt.transform.position;
-        float l_Distance = Vector3.Distance(l_LookAt, transform.position);
-        float l_HorizontalAxis = Input.GetAxis("Mouse X");
-        float l_VerticalAxis = Input.GetAxis("Mouse Y");
-        m_Yaw += l_HorizontalAxis * m_YawSpeed * Time.deltaTime;
-        m_Pitch += l_VerticalAxis * m_PitchSpeed * Time.deltaTime;
-        m_Pitch = Mathf.Clamp(m_Pitch, m_MinPitch, m_MaxPitch);
+        Vector3 lookAt = m_Player.m_LookAt.transform.position;
 
-        float l_PitchRadians = m_Pitch * Mathf.Deg2Rad;
-        float l_YawRadians = m_Yaw * Mathf.Deg2Rad;
-        Vector3 l_Direction = new Vector3(Mathf.Cos(l_PitchRadians) * Mathf.Sin(l_YawRadians),
-            Mathf.Sin(l_PitchRadians), Mathf.Cos(l_PitchRadians) * Mathf.Cos(l_YawRadians));
+        float pitchRad = m_Pitch * Mathf.Deg2Rad;
+        float yawRad = m_Yaw * Mathf.Deg2Rad;
 
-        l_Distance = Mathf.Clamp(l_Distance, m_MinDistance, m_MaxDistance);
+        Vector3 dir = new Vector3(
+            Mathf.Cos(pitchRad) * Mathf.Sin(yawRad),
+            Mathf.Sin(pitchRad),
+            Mathf.Cos(pitchRad) * Mathf.Cos(yawRad)
+        );
 
-        Ray l_Ray = new Ray(l_LookAt, -l_Direction);
-        Vector3 l_DesiredPosition = l_LookAt - l_Direction * l_Distance;
+        float dist = 6f;
 
-        if (Physics.Raycast(l_Ray, out RaycastHit l_RaycastHit, l_Distance, m_LayerMask.value))
+        Ray ray = new Ray(lookAt, -dir);
+        Vector3 desiredPos = lookAt - dir * dist;
+
+        if (Physics.Raycast(ray, out RaycastHit hit, dist, m_LayerMask.value))
         {
-            l_DesiredPosition = l_RaycastHit.point + l_Direction * m_OffsetDistance;
+            desiredPos = hit.point + dir * m_OffsetDistance;
         }
 
-        transform.position = l_DesiredPosition;
-        transform.LookAt(l_LookAt);
+        transform.position = desiredPos;
+        transform.LookAt(lookAt);
     }
 }
