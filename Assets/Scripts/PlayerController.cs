@@ -14,6 +14,14 @@ public class PlayerController : MonoBehaviour, IRestartElement
         KICK
     }
 
+    public enum TJumpType
+    {
+        JUMP = 0,
+        DOUBLE_JUMP,
+        TRIPLE_JUMP,
+        LONG_JUMP
+    }
+
     public Camera m_Camera;
     CharacterController m_CharacterController;
     Animator m_Animator;
@@ -30,8 +38,18 @@ public class PlayerController : MonoBehaviour, IRestartElement
 
     [Header("Jump")]
     public float m_JumpSpeed = 12f;
+    public float m_DoubleJumpSpeed = 16f;
+    public float m_TripleJumpSpeed = 22f;
+    public float m_LongJumpSpeed = 5f;
     public float m_MaxAngleToKillGombaa = 50f;
-    public float m_KillJumpSpeed = 4f; 
+    public float m_KillJumpSpeed = 4f;
+    public TJumpType m_JumpType = TJumpType.JUMP;
+
+    public float m_CoyoteTime = 0.2f;
+    private float m_CoyoteTimeCounter = 0;
+
+    public float m_TimeBetweenJumps = 0.3f;
+    private float m_TimeBetweenJumpsCounter;
 
     [Header("Punch")]
     public float m_MaxTimeToComboPunch = 0.8f;
@@ -74,7 +92,6 @@ public class PlayerController : MonoBehaviour, IRestartElement
         m_StartPosition = transform.position;
         m_StartRotation = transform.rotation;
         GameManager.GetGameManager().AddRestartGameElements(this);
-
     }
     void Update()
     {
@@ -105,7 +122,6 @@ public class PlayerController : MonoBehaviour, IRestartElement
             l_Movement -= l_Forward;
         }
 
-
         l_Movement.Normalize();
 
         float l_SpeedAnimatorValue = 0.5f;
@@ -133,12 +149,19 @@ public class PlayerController : MonoBehaviour, IRestartElement
         l_Movement *= l_Speed*Time.deltaTime;
         m_VerticalSpeed += Physics.gravity.y * Time.deltaTime;
         l_Movement.y = m_VerticalSpeed * Time.deltaTime;
+
         CollisionFlags l_CollisionFlags = m_CharacterController.Move(l_Movement);   
         if((l_CollisionFlags & CollisionFlags.CollidedBelow) != 0 && m_VerticalSpeed < 0f)
+        {
             m_VerticalSpeed = 0f;
+            m_CoyoteTimeCounter = m_CoyoteTime;
+            if (m_TimeBetweenJumpsCounter < 0f) m_TimeBetweenJumpsCounter = m_TimeBetweenJumps;
+        }
         else if((l_CollisionFlags & CollisionFlags.CollidedAbove) != 0 && m_VerticalSpeed > 0f)
             m_VerticalSpeed = 0f;
 
+        m_CoyoteTimeCounter -= Time.deltaTime;
+        m_TimeBetweenJumpsCounter -=Time.deltaTime;
         m_VerticalSpeed += Physics.gravity.y * Time.deltaTime;
         l_Movement.y += m_VerticalSpeed * Time.deltaTime;
 
@@ -187,11 +210,35 @@ public class PlayerController : MonoBehaviour, IRestartElement
     }
     bool CanJump()
     {
-        return true;
+        return m_CoyoteTimeCounter > 0f;
     }
     void Jump()
     {
-        m_VerticalSpeed = m_JumpSpeed;
+        if(m_CoyoteTimeCounter <= 0f)
+        {
+            m_VerticalSpeed = m_JumpSpeed;
+            m_JumpType = TJumpType.JUMP;
+        }
+        else
+        {
+            if (m_JumpType == TJumpType.JUMP)
+            {
+                m_VerticalSpeed = m_JumpSpeed;
+                m_JumpType = TJumpType.DOUBLE_JUMP;
+            }
+            else if (m_JumpType == TJumpType.DOUBLE_JUMP)
+            {
+                m_VerticalSpeed = m_DoubleJumpSpeed;
+                m_JumpType = TJumpType.TRIPLE_JUMP;
+            }
+            else if (m_JumpType == TJumpType.TRIPLE_JUMP)
+            {
+                m_VerticalSpeed = m_TripleJumpSpeed;
+                m_JumpType = TJumpType.JUMP;
+            }
+        }
+        
+        m_CoyoteTimeCounter = 0f;
     }
     void JumpOverEnemy()
     {
@@ -241,12 +288,10 @@ public class PlayerController : MonoBehaviour, IRestartElement
         AudioSource l_CurrentAudioSource = null;
         if (_AnimationEvent.stringParameter == "Left")
         {
-            Debug.Log("Left");
             l_CurrentAudioSource = m_FootStepL;
         }
         else if(_AnimationEvent.stringParameter == "Right")
         {
-            Debug.Log("Right");
             l_CurrentAudioSource = m_FootStepR;
         }
 
