@@ -15,9 +15,24 @@ public class LifeController
     {
         m_Life += life;
         m_OnLifeChanged.Invoke(this);
+        if (m_Life <= 0)
+        {
+            Die();
+        }
     }
     public int GetValue()
     {
         return m_Life;
     }
+    void Die()
+    {
+        GameManager.GetGameManager().m_Player.Die();
+    }
+
+    public void ResetLife()
+    {
+        m_Life = 8;
+        m_OnLifeChanged?.Invoke(this);
+    }
+
 }

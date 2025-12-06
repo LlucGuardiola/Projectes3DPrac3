@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour, IRestartElement
     public float m_DampTime = 0.2f;
     [Range(0f, 1f)] public float m_RotationLerpPct = 0.8f;
     CheckPoint m_CurrentCheckPoint;
+    Vector3 m_KnockbackVelocity = Vector3.zero;
 
     [Header("Jump")]
     public float m_JumpSpeed = 12f;
@@ -51,8 +52,8 @@ public class PlayerController : MonoBehaviour, IRestartElement
     public float m_BridgeHitForce = 10f;
 
     [Header("Audio")]
-    public AudioSource m_LeftFootStepAudioSource;
-    public AudioSource m_RightFootStepAudioSource;
+    public AudioSource m_FootStepR;
+    public AudioSource m_FootStepL;
 
     CoinsController m_CoinsController = new CoinsController();
     LifeController m_LifeController = new LifeController();
@@ -136,6 +137,12 @@ public class PlayerController : MonoBehaviour, IRestartElement
             m_VerticalSpeed = 0f;
         else if((l_CollisionFlags & CollisionFlags.CollidedAbove) != 0 && m_VerticalSpeed > 0f)
             m_VerticalSpeed = 0f;
+
+        m_VerticalSpeed += Physics.gravity.y * Time.deltaTime;
+        l_Movement.y += m_VerticalSpeed * Time.deltaTime;
+
+        m_CharacterController.Move(l_Movement);
+
 
         UpdatePunch();
     }
@@ -224,17 +231,22 @@ public class PlayerController : MonoBehaviour, IRestartElement
         transform.position = m_StartPosition;
         transform.rotation = m_StartRotation;
         m_CharacterController.enabled = true;
+        m_LifeController.ResetLife();
+
     }
+
     public void Step (AnimationEvent _AnimationEvent)
     {
         AudioSource l_CurrentAudioSource = null;
         if (_AnimationEvent.stringParameter == "Left")
         {
             Debug.Log("Left");
+            l_CurrentAudioSource = m_FootStepL;
         }
         else if(_AnimationEvent.stringParameter == "Right")
         {
             Debug.Log("Right");
+            l_CurrentAudioSource = m_FootStepR;
         }
 
         AudioClip l_AudioClip = (AudioClip)_AnimationEvent.objectReferenceParameter;
@@ -298,5 +310,18 @@ public class PlayerController : MonoBehaviour, IRestartElement
     public void Hit()
     {
         m_LifeController.AddLife(-1);
+      
+
+    }
+
+ 
+    public void ApplyKnockback(Vector3 force)
+    {
+        m_KnockbackVelocity = force;
+    }
+    public void Die()
+    {
+      
+        GameManager.GetGameManager().RestartGame();
     }
 }
