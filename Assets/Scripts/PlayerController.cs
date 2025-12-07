@@ -37,9 +37,9 @@ public class PlayerController : MonoBehaviour, IRestartElement
     Vector3 m_KnockbackVelocity = Vector3.zero;
 
     [Header("Jump")]
-    public float m_JumpSpeed = 12f;
-    public float m_DoubleJumpSpeed = 13f;
-    public float m_TripleJumpSpeed = 14f;
+    public float m_JumpSpeed = 6f;
+    public float m_DoubleJumpSpeed = 11f;
+    public float m_TripleJumpSpeed = 16f;
     public float m_LongJumpSpeed = 5f;
     public float m_MaxAngleToKillGombaa = 50f;
     public float m_KillJumpSpeed = 4f;

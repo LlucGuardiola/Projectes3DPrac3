@@ -709,7 +709,7 @@ MonoBehaviour:
     m_Bits: 1
   m_OffsetDistance: 0.4
   m_TimeToResetCam: 5
-  m_ResetTime: 2
+  m_ResetTime: 3
 --- !u!1001 &387145404
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1080,9 +1080,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 100032, guid: 2c49a169fa02b2545921fcc829011ecb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 100098, guid: 2c49a169fa02b2545921fcc829011ecb, type: 3}
       propertyPath: m_Name
       value: SuperMario
+      objectReference: {fileID: 0}
+    - target: {fileID: 100098, guid: 2c49a169fa02b2545921fcc829011ecb, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 100098, guid: 2c49a169fa02b2545921fcc829011ecb, type: 3}
       propertyPath: m_TagString
@@ -1200,8 +1208,8 @@ MonoBehaviour:
   m_DampTime: 0.14
   m_RotationLerpPct: 0.1
   m_JumpSpeed: 6
-  m_DoubleJumpSpeed: 16
-  m_TripleJumpSpeed: 22
+  m_DoubleJumpSpeed: 11
+  m_TripleJumpSpeed: 16
   m_LongJumpSpeed: 5
   m_MaxAngleToKillGombaa: 35
   m_KillJumpSpeed: 3
