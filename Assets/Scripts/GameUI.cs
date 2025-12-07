@@ -6,6 +6,7 @@ public class GameUI : MonoBehaviour
 {
     public Text m_CoinsText;
     public Image m_LifeBar;
+    private bool m_UIHidden; 
 
     [Header("Animations")]
     public Animation m_Animation;
@@ -21,6 +22,7 @@ public class GameUI : MonoBehaviour
         SetLifeBar(1f);
         m_Animation.Play(m_StayOutAnimationClip.name);
         m_Animation.Sample();
+        m_UIHidden = true;
 
         DependencyInjector.GetDependency<CoinsController>().m_OnCoinsChanged += OnCoinsChanged;
         DependencyInjector.GetDependency<LifeController>().m_OnLifeChanged += OnLifeChanged;
@@ -48,6 +50,7 @@ public class GameUI : MonoBehaviour
         m_Animation.Play(m_InAnimationClip.name);
         m_Animation.PlayQueued(m_StayInAnimationClip.name);
         m_Animation.Sample();
+        m_UIHidden = false;
         StartCoroutine(HideUICorutine());
     }
     public void HideUI()
@@ -55,15 +58,22 @@ public class GameUI : MonoBehaviour
         m_Animation.Play(m_OutAnimationClip.name);
         m_Animation.PlayQueued(m_StayOutAnimationClip.name);
         m_Animation.Sample();
+        m_UIHidden = true;
     }
     public void OnCoinsChanged(CoinsController _CoinsController)
     {
         SetCoins(_CoinsController.GetValue());
-        ShowUI();
+        if(m_UIHidden)
+        {
+            ShowUI();
+        }
     }
     public void OnLifeChanged(LifeController _LifeController)
     {
         SetLifeBar(_LifeController.GetValue()/8f);
-        ShowUI();
+        if (m_UIHidden)
+        {
+            ShowUI();
+        }
     }
 }

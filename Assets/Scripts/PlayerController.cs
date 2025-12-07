@@ -1,7 +1,6 @@
-using System.Diagnostics.CodeAnalysis;
-using Unity.VisualScripting;
+using System.Collections;
 using UnityEngine;
-using static UnityEditor.Progress;
+using UnityEngine.UI;
 
 
 
@@ -40,9 +39,11 @@ public class PlayerController : MonoBehaviour, IRestartElement
     public float m_JumpSpeed = 6f;
     public float m_DoubleJumpSpeed = 11f;
     public float m_TripleJumpSpeed = 16f;
-    public float m_LongJumpSpeed = 5f;
+    public float m_LongJumpVerticalSpeed = 8f;
+    public float m_LongJumpForwardSpeed = 2f;
     public float m_MaxAngleToKillGombaa = 50f;
     public float m_KillJumpSpeed = 4f;
+    private bool m_AddLongJumpImpulse; 
     public TJumpType m_JumpType = TJumpType.JUMP;
 
     public float m_CoyoteTime = 0.2f;
@@ -50,7 +51,6 @@ public class PlayerController : MonoBehaviour, IRestartElement
 
     public float m_TimeBetweenJumps = 0.2f;
     private float m_TimeBetweenJumpsCounter = 0f;
-    private bool m_CountJumpTime;
     private float m_HitCooldown = 0.5f;
     private float m_HitTimer = 0f;
 
@@ -174,27 +174,31 @@ public class PlayerController : MonoBehaviour, IRestartElement
         {
             m_VerticalSpeed = 0f;
             if (m_CoyoteTimeCounter < 0f) CountJumpTime(true);
+            m_Animator.SetBool("OnAir", false);
             m_CoyoteTimeCounter = m_CoyoteTime;
         }
         else if ((l_CollisionFlags & CollisionFlags.CollidedAbove) != 0 && m_VerticalSpeed > 0f)
         {
             m_VerticalSpeed = 0f;
         }
+        else if (m_CoyoteTimeCounter > 0f)
+        {
+            m_Animator.SetBool("OnAir", true);
+        }
 
-        Debug.Log(m_TimeBetweenJumpsCounter);
         m_CoyoteTimeCounter -= Time.deltaTime;
         CountJumpTime(false);
         m_VerticalSpeed += Physics.gravity.y * Time.deltaTime;
         l_Movement.y += m_VerticalSpeed * Time.deltaTime;
 
+        Debug.Log(m_AddLongJumpImpulse);
+        if (m_AddLongJumpImpulse) l_Movement += gameObject.transform.forward * m_LongJumpForwardSpeed * Time.deltaTime;
         m_CharacterController.Move(l_Movement);
-
 
         UpdatePunch();
         if (m_HitTimer > 0f)
             m_HitTimer -= Time.deltaTime;
         HandleFootsteps(l_Movement, l_Speed);
-
     }
 
     void HandleFootsteps(Vector3 movement, float speed)
@@ -216,8 +220,6 @@ public class PlayerController : MonoBehaviour, IRestartElement
             m_StepTimer = interval;
         }
     }
-
-
 
     void PlayFootstep()
     {
@@ -243,7 +245,6 @@ public class PlayerController : MonoBehaviour, IRestartElement
         if (m_HitAudio != null)
             m_HitAudio.Play();
     }
-
 
     private void LateUpdate()
     {
@@ -287,24 +288,28 @@ public class PlayerController : MonoBehaviour, IRestartElement
     {
         return m_CoyoteTimeCounter > 0f;
     }
+    private IEnumerator AddJumpImpulse()
+    {
+        m_AddLongJumpImpulse = true;
+        yield return new WaitForSeconds(0.5f);
+        StopImpulse();
+    }
+    private void StopImpulse()
+    {
+        m_AddLongJumpImpulse = false;
+    }
     void Jump()
     {
-        switch (m_JumpType)
-        {
-            case TJumpType.JUMP:
-                if (m_JumpSimpleAudio != null) m_JumpSimpleAudio.Play();
-                break;
-            case TJumpType.DOUBLE_JUMP:
-                if (m_JumpDoubleAudio != null) m_JumpDoubleAudio.Play();
-                break;
-            case TJumpType.TRIPLE_JUMP:
-                if (m_JumpTripleAudio != null) m_JumpTripleAudio.Play();
-                break;
-        }
-
         int l_DisplayJump = (int)m_JumpType;
 
-        if (m_TimeBetweenJumpsCounter < 0f)
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            m_VerticalSpeed = m_LongJumpVerticalSpeed;
+            StartCoroutine(AddJumpImpulse()); 
+            l_DisplayJump = 3;
+            m_JumpType = TJumpType.DOUBLE_JUMP;
+        }
+        else if (m_TimeBetweenJumpsCounter < 0f)
         {
             m_VerticalSpeed = m_JumpSpeed;
             l_DisplayJump = 0;
@@ -329,6 +334,20 @@ public class PlayerController : MonoBehaviour, IRestartElement
             }
         }
 
+        switch ((TJumpType)l_DisplayJump)
+        {
+            case TJumpType.JUMP:
+                if (m_JumpSimpleAudio != null) m_JumpSimpleAudio.Play();
+                break;
+            case TJumpType.DOUBLE_JUMP:
+                if (m_JumpDoubleAudio != null) m_JumpDoubleAudio.Play();
+                break;
+            case TJumpType.TRIPLE_JUMP:
+                if (m_JumpTripleAudio != null) m_JumpTripleAudio.Play();
+                break;
+        }
+
+        m_Animator.SetBool("OnAir", true);
         m_Animator.SetTrigger("Jump");
         m_Animator.SetInteger("JumpId", l_DisplayJump);
         m_CoyoteTimeCounter = 0f;
@@ -380,8 +399,6 @@ public class PlayerController : MonoBehaviour, IRestartElement
         m_LifeController.ResetLife();
 
     }
-
-   
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Elevator"))
@@ -452,11 +469,12 @@ public class PlayerController : MonoBehaviour, IRestartElement
     }
     public void Hit()
     {
-        if (m_HitTimer > 0f) return; 
+        if (m_HitTimer > 0f) return;
 
+        if (m_LifeController.m_Life <= 0) return;
         m_LifeController.AddLife(-1);
         PlayHitSound();
-
+        m_Animator.SetTrigger("Hit");
         m_HitTimer = m_HitCooldown;
     }
     public void Heal()
@@ -470,11 +488,14 @@ public class PlayerController : MonoBehaviour, IRestartElement
     }
     public void Die()
     {
-
         if (m_DeathAudio != null)
             m_DeathAudio.Play();
-
+        m_Animator.SetTrigger("Death");
+        StartCoroutine(WaitToReset());
+    }
+    IEnumerator WaitToReset()
+    {
+        yield return new WaitForSeconds(2f);
         GameManager.GetGameManager().m_GameOverUI.Show();
-
     }
 }

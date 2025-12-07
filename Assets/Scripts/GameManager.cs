@@ -11,8 +11,6 @@ public class GameManager : MonoBehaviour
     public PlayerController m_Player;
     public GameOverUI m_GameOverUI;
 
-
-
     private void Awake()
     {
         if (m_GameManager != null)
@@ -35,25 +33,22 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-        if(Input.GetKey(KeyCode.R))
-        {
-            m_GameOverUI.Show();
-        }
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            m_Player.Hit();
-        }
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            m_Player.AddCoin();
-        }
+        //if(Input.GetKey(KeyCode.R))
+        //{
+        //    m_GameOverUI.Show();
+        //}
+        //if (Input.GetKeyDown(KeyCode.H))
+        //{
+        //    m_Player.Hit();
+        //}
+        //if (Input.GetKeyDown(KeyCode.C))
+        //{
+        //    m_Player.AddCoin();
+        //}
     }
     public void RestartGame()
     {
-       
         foreach (IRestartElement element in m_RestartElements)
-                element.RestartGame();
-      
+            element.RestartGame();
     }
-   
 }

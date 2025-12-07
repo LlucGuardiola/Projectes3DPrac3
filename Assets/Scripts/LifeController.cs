@@ -34,5 +34,4 @@ public class LifeController
         m_Life = 8;
         m_OnLifeChanged?.Invoke(this);
     }
-
 }
