@@ -707,7 +707,7 @@ MonoBehaviour:
   m_LayerMask:
     serializedVersion: 2
     m_Bits: 1
-  m_OffsetDistance: 0.1
+  m_OffsetDistance: 0.4
   m_TimeToResetCam: 5
   m_ResetTime: 2
 --- !u!1001 &387145404
@@ -1207,7 +1207,7 @@ MonoBehaviour:
   m_KillJumpSpeed: 3
   m_JumpType: 0
   m_CoyoteTime: 0.3
-  m_TimeBetweenJumps: 0.3
+  m_TimeBetweenJumps: 0.2
   m_MaxTimeToComboPunch: 0.8
   m_RightHandPunchCollider: {fileID: 1218710873}
   m_LeftHandPunchCollider: {fileID: 839545577}

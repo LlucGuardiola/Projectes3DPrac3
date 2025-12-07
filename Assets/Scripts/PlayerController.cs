@@ -38,8 +38,8 @@ public class PlayerController : MonoBehaviour, IRestartElement
 
     [Header("Jump")]
     public float m_JumpSpeed = 12f;
-    public float m_DoubleJumpSpeed = 16f;
-    public float m_TripleJumpSpeed = 22f;
+    public float m_DoubleJumpSpeed = 13f;
+    public float m_TripleJumpSpeed = 14f;
     public float m_LongJumpSpeed = 5f;
     public float m_MaxAngleToKillGombaa = 50f;
     public float m_KillJumpSpeed = 4f;
@@ -48,8 +48,9 @@ public class PlayerController : MonoBehaviour, IRestartElement
     public float m_CoyoteTime = 0.2f;
     private float m_CoyoteTimeCounter = 0;
 
-    public float m_TimeBetweenJumps = 0.3f;
-    private float m_TimeBetweenJumpsCounter;
+    public float m_TimeBetweenJumps = 0.2f;
+    private float m_TimeBetweenJumpsCounter = 0f;
+    private bool m_CountJumpTime;
 
     [Header("Punch")]
     public float m_MaxTimeToComboPunch = 0.8f;
@@ -104,13 +105,13 @@ public class PlayerController : MonoBehaviour, IRestartElement
         l_Forward.y = 0;
         l_Forward.Normalize();
 
-        if(Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D))
         {
-            l_Movement=l_Right;
+            l_Movement = l_Right;
         }
-        else if(Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A))
         {
-            l_Movement =- l_Right;
+            l_Movement = -l_Right;
         }
 
         if (Input.GetKey(KeyCode.W))
@@ -146,22 +147,25 @@ public class PlayerController : MonoBehaviour, IRestartElement
                 Jump();
         }
 
-        l_Movement *= l_Speed*Time.deltaTime;
+        l_Movement *= l_Speed * Time.deltaTime;
         m_VerticalSpeed += Physics.gravity.y * Time.deltaTime;
         l_Movement.y = m_VerticalSpeed * Time.deltaTime;
 
-        CollisionFlags l_CollisionFlags = m_CharacterController.Move(l_Movement);   
-        if((l_CollisionFlags & CollisionFlags.CollidedBelow) != 0 && m_VerticalSpeed < 0f)
+        CollisionFlags l_CollisionFlags = m_CharacterController.Move(l_Movement);
+        if ((l_CollisionFlags & CollisionFlags.CollidedBelow) != 0 && m_VerticalSpeed < 0f)
         {
             m_VerticalSpeed = 0f;
+            if (m_CoyoteTimeCounter < 0f) CountJumpTime(true);
             m_CoyoteTimeCounter = m_CoyoteTime;
-            if (m_TimeBetweenJumpsCounter < 0f) m_TimeBetweenJumpsCounter = m_TimeBetweenJumps;
         }
-        else if((l_CollisionFlags & CollisionFlags.CollidedAbove) != 0 && m_VerticalSpeed > 0f)
+        else if ((l_CollisionFlags & CollisionFlags.CollidedAbove) != 0 && m_VerticalSpeed > 0f)
+        {
             m_VerticalSpeed = 0f;
+        }
 
+        Debug.Log(m_TimeBetweenJumpsCounter);
         m_CoyoteTimeCounter -= Time.deltaTime;
-        m_TimeBetweenJumpsCounter -=Time.deltaTime;
+        CountJumpTime(false);
         m_VerticalSpeed += Physics.gravity.y * Time.deltaTime;
         l_Movement.y += m_VerticalSpeed * Time.deltaTime;
 
@@ -169,6 +173,16 @@ public class PlayerController : MonoBehaviour, IRestartElement
 
 
         UpdatePunch();
+    }
+    void CountJumpTime(bool Reset)
+    {
+        if (Reset)
+        {
+            m_TimeBetweenJumpsCounter = m_TimeBetweenJumps;
+            return;
+        }
+            
+        m_TimeBetweenJumpsCounter -= Time.deltaTime;
     }
     private void LateUpdate()
     {
@@ -214,10 +228,11 @@ public class PlayerController : MonoBehaviour, IRestartElement
     }
     void Jump()
     {
-        if(m_CoyoteTimeCounter <= 0f)
+        if(m_TimeBetweenJumpsCounter < 0f)
         {
+            Debug.Log(m_TimeBetweenJumpsCounter);
             m_VerticalSpeed = m_JumpSpeed;
-            m_JumpType = TJumpType.JUMP;
+            m_JumpType = TJumpType.DOUBLE_JUMP;
         }
         else
         {
