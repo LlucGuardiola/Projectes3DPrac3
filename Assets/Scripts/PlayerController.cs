@@ -228,10 +228,13 @@ public class PlayerController : MonoBehaviour, IRestartElement
     }
     void Jump()
     {
-        if(m_TimeBetweenJumpsCounter < 0f)
+        int l_DisplayJump = (int)m_JumpType;
+
+        if (m_TimeBetweenJumpsCounter < 0f)
         {
             Debug.Log(m_TimeBetweenJumpsCounter);
             m_VerticalSpeed = m_JumpSpeed;
+            l_DisplayJump = 0;
             m_JumpType = TJumpType.DOUBLE_JUMP;
         }
         else
@@ -252,7 +255,9 @@ public class PlayerController : MonoBehaviour, IRestartElement
                 m_JumpType = TJumpType.JUMP;
             }
         }
-        
+
+        m_Animator.SetTrigger("Jump");
+        m_Animator.SetInteger("JumpId", l_DisplayJump);
         m_CoyoteTimeCounter = 0f;
     }
     void JumpOverEnemy()
