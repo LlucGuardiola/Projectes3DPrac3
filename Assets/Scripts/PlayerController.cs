@@ -51,6 +51,8 @@ public class PlayerController : MonoBehaviour, IRestartElement
     public float m_TimeBetweenJumps = 0.2f;
     private float m_TimeBetweenJumpsCounter = 0f;
     private bool m_CountJumpTime;
+    private float m_HitCooldown = 0.5f;
+    private float m_HitTimer = 0f;
 
     [Header("Punch")]
     public float m_MaxTimeToComboPunch = 0.8f;
@@ -74,6 +76,22 @@ public class PlayerController : MonoBehaviour, IRestartElement
     [Header("Audio")]
     public AudioSource m_FootStepR;
     public AudioSource m_FootStepL;
+
+    [Header("Jump Audio")]
+    public AudioSource m_JumpSimpleAudio;
+    public AudioSource m_JumpDoubleAudio;
+    public AudioSource m_JumpTripleAudio;
+
+    [Header("Hit Audio")]
+    public AudioSource m_HitAudio;
+
+    [Header("Death Audio")]
+    public AudioSource m_DeathAudio;
+
+    [Header("Auto Footsteps")]
+    public float m_StepIntervalWalk = 0.40f;
+    public float m_StepIntervalRun = 0.24f;
+    private float m_StepTimer = 0f;
 
     public CoinsController m_CoinsController = new CoinsController();
     public LifeController m_LifeController = new LifeController();
@@ -173,7 +191,43 @@ public class PlayerController : MonoBehaviour, IRestartElement
 
 
         UpdatePunch();
+        if (m_HitTimer > 0f)
+            m_HitTimer -= Time.deltaTime;
+        HandleFootsteps(l_Movement, l_Speed);
+
     }
+
+    void HandleFootsteps(Vector3 movement, float speed)
+    {
+        if (movement.magnitude < 0.1f || !m_CharacterController.isGrounded)
+        {
+            m_StepTimer = 0f;
+            return;
+        }
+
+        float interval = (speed == m_RunSpeed) ? m_StepIntervalRun : m_StepIntervalWalk;
+
+        float dynamicFactor = Mathf.Clamp(movement.magnitude, 0.7f, 1.1f);
+        m_StepTimer -= Time.deltaTime * dynamicFactor;
+
+        if (m_StepTimer <= 0f)
+        {
+            PlayFootstep();
+            m_StepTimer = interval;
+        }
+    }
+
+
+
+    void PlayFootstep()
+    {
+        bool useLeft = Random.value > 0.5f;
+        AudioSource src = useLeft ? m_FootStepL : m_FootStepR;
+
+        if (src != null && src.clip != null)
+            src.Play();
+    }
+
     void CountJumpTime(bool Reset)
     {
         if (Reset)
@@ -184,6 +238,13 @@ public class PlayerController : MonoBehaviour, IRestartElement
             
         m_TimeBetweenJumpsCounter -= Time.deltaTime;
     }
+    void PlayHitSound()
+    {
+        if (m_HitAudio != null)
+            m_HitAudio.Play();
+    }
+
+
     private void LateUpdate()
     {
         UpdateElevator();
@@ -228,11 +289,23 @@ public class PlayerController : MonoBehaviour, IRestartElement
     }
     void Jump()
     {
+        switch (m_JumpType)
+        {
+            case TJumpType.JUMP:
+                if (m_JumpSimpleAudio != null) m_JumpSimpleAudio.Play();
+                break;
+            case TJumpType.DOUBLE_JUMP:
+                if (m_JumpDoubleAudio != null) m_JumpDoubleAudio.Play();
+                break;
+            case TJumpType.TRIPLE_JUMP:
+                if (m_JumpTripleAudio != null) m_JumpTripleAudio.Play();
+                break;
+        }
+
         int l_DisplayJump = (int)m_JumpType;
 
         if (m_TimeBetweenJumpsCounter < 0f)
         {
-            Debug.Log(m_TimeBetweenJumpsCounter);
             m_VerticalSpeed = m_JumpSpeed;
             l_DisplayJump = 0;
             m_JumpType = TJumpType.DOUBLE_JUMP;
@@ -260,6 +333,7 @@ public class PlayerController : MonoBehaviour, IRestartElement
         m_Animator.SetInteger("JumpId", l_DisplayJump);
         m_CoyoteTimeCounter = 0f;
     }
+
     void JumpOverEnemy()
     {
         m_VerticalSpeed = m_KillJumpSpeed;
@@ -274,6 +348,10 @@ public class PlayerController : MonoBehaviour, IRestartElement
             {
                 l_GoombaEnemy.Kill();
                 JumpOverEnemy();
+            }
+            else
+            {
+                Hit(); 
             }
         }
         else if(hit.collider.CompareTag("Bridge"))
@@ -303,22 +381,7 @@ public class PlayerController : MonoBehaviour, IRestartElement
 
     }
 
-    public void Step (AnimationEvent _AnimationEvent)
-    {
-        AudioSource l_CurrentAudioSource = null;
-        if (_AnimationEvent.stringParameter == "Left")
-        {
-            l_CurrentAudioSource = m_FootStepL;
-        }
-        else if(_AnimationEvent.stringParameter == "Right")
-        {
-            l_CurrentAudioSource = m_FootStepR;
-        }
-
-        AudioClip l_AudioClip = (AudioClip)_AnimationEvent.objectReferenceParameter;
-        l_CurrentAudioSource.clip = l_AudioClip;
-        l_CurrentAudioSource.Play();
-    }
+   
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Elevator"))
@@ -389,7 +452,12 @@ public class PlayerController : MonoBehaviour, IRestartElement
     }
     public void Hit()
     {
+        if (m_HitTimer > 0f) return; 
+
         m_LifeController.AddLife(-1);
+        PlayHitSound();
+
+        m_HitTimer = m_HitCooldown;
     }
     public void Heal()
     {
@@ -403,8 +471,10 @@ public class PlayerController : MonoBehaviour, IRestartElement
     public void Die()
     {
 
-      
-            GameManager.GetGameManager().m_GameOverUI.Show();
+        if (m_DeathAudio != null)
+            m_DeathAudio.Play();
+
+        GameManager.GetGameManager().m_GameOverUI.Show();
 
     }
 }

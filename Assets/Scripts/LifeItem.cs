@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class LifeItem : Item
 {
+    public AudioSource m_AudioSource;
+
     public override void Pick()
     {
+        AudioSource.PlayClipAtPoint(m_AudioSource.clip, transform.position);
         base.Pick();
         GameManager.GetGameManager().m_Player.Heal();
     }
