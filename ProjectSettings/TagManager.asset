@@ -9,6 +9,7 @@ TagManager:
   - Bridge
   - CheckPoint
   - Item
+  - Deathzone
   layers:
   - Default
   - TransparentFX

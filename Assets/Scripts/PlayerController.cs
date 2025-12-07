@@ -341,6 +341,11 @@ public class PlayerController : MonoBehaviour, IRestartElement
                 l_Item.Pick();
             }
         }
+        else if (other.CompareTag("Deathzone"))
+        {
+            GameManager.GetGameManager().m_GameOverUI.Show();
+
+        }
     }
     private void OnTriggerExit(Collider other)
     {
@@ -397,7 +402,9 @@ public class PlayerController : MonoBehaviour, IRestartElement
     }
     public void Die()
     {
+
       
-        GameManager.GetGameManager().RestartGame();
+            GameManager.GetGameManager().m_GameOverUI.Show();
+
     }
 }

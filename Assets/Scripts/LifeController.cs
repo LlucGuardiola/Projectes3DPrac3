@@ -14,7 +14,7 @@ public class LifeController
     public void AddLife(int life)
     {
         m_Life += life;
-        m_OnLifeChanged.Invoke(this);
+        m_OnLifeChanged?.Invoke(this);
         if (m_Life <= 0)
         {
             Die();

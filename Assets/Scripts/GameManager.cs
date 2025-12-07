@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     List<IRestartElement> m_RestartElements = new List<IRestartElement>();
     public GameUI m_GameUI;
     public PlayerController m_Player;
+    public GameOverUI m_GameOverUI;
+
+
 
     private void Awake()
     {
@@ -21,6 +24,7 @@ public class GameManager : MonoBehaviour
         m_GameManager = this;
         DontDestroyOnLoad(gameObject);
     }
+   
     public static GameManager GetGameManager()
     {
         return m_GameManager;
@@ -33,7 +37,7 @@ public class GameManager : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.R))
         {
-            RestartGame();
+            m_GameOverUI.Show();
         }
         if (Input.GetKeyDown(KeyCode.H))
         {
@@ -46,9 +50,10 @@ public class GameManager : MonoBehaviour
     }
     public void RestartGame()
     {
-        foreach (IRestartElement l_RestartGameElement in m_RestartElements)
-        {
-            l_RestartGameElement.RestartGame();
-        }
+       
+        foreach (IRestartElement element in m_RestartElements)
+                element.RestartGame();
+      
     }
+   
 }
